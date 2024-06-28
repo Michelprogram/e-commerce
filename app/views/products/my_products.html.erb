@@ -1,0 +1,42 @@
+<%= link_to 'New Product', new_product_path %> -->
+
+<h2 class="text-4xl font-bold tracking-tight text-center sm:text-6xl m-8">List of your products</h2>
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Product name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Description
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Stock
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @products.each do |product| %>
+              <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><%= product.name %></td>
+                <td class="px-6 py-4"><%= product.description %></td>
+                <td class="px-6 py-4"><%= product.price %>$</td>
+                <td class="px-6 py-4"><%= product.stock %></td>
+                <td class="px-6 py-4 flex flex-col">
+                    <%= link_to 'Show', product, class: "underline text-blue-300" %>
+                    <%= link_to 'Edit', edit_product_path(product), class: "underline text-blue-300" %>
+                    <%= button_to 'Delete', product, class: "underline text-blue-300", method: :delete, data: { confirm: 'Are you sure?' } %>
+                </td>
+              </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

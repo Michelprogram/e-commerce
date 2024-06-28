@@ -1,0 +1,9 @@
+<%= form_with model: [product, order], url: orders_path do |f| %>
+  <div class="field">
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Order" %>
+  </div>
+<% end %>

@@ -1,0 +1,41 @@
+<h2 class="text-4xl font-bold tracking-tight text-center sm:text-6xl">Product detail</h2>
+
+<div class="flex-col md:flex-row justify-center flex gap-4 items-start mx-4 py-12">
+    <div class="flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
+        <div class="relative w-full md:w-48 flex justify-center items-center">
+            <img src="https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg" alt="shopping image"
+                class="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none">
+        </div>
+        <%= form_with model: [@product, @product.orders.build], url: orders_path, class: "flex-auto p-6" do |f| %>
+            <div class="flex flex-wrap">
+                <h1 class="flex-auto text-xl font-semibold dark:text-gray-50"><%= @product.name %></h1>
+                <div class="text-xl font-semibold text-gray-500 dark:text-gray-300"><%= number_to_currency(@product.price) %></div>
+                <div class="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300"><%= @product.description %></div>
+            </div>
+            <div class="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
+                <div class="flex space-x-2">
+                    <p>Stock: <%= @product.stock %></p>
+                </div>
+            </div>
+            <div class="sm:col-span-4 my-5">
+                <div class="field">
+                  <%= f.label :quantity, class: "block text-sm font-medium leading-6 text-white" %>
+                  <%= f.number_field :quantity, class: "text-white border-white border-2 block flex-1 border-0 bg-transparent py-1.5 pl-1 focus:ring-0 sm:text-sm sm:leading-6" %>
+                </div>
+            </div>
+            <div class="flex mb-4 text-sm font-medium">
+                <div class="actions">
+                  <%= f.submit "Order", class: "py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg " %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+</div>
+
+<div class="flex justify-center items-center gap-8">
+    <%= link_to 'Back to Products', products_path, class: "py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg " %>
+    <% if current_user.seller == @product.seller  %>
+        <%= link_to 'Edit', edit_product_path(@product), class: "py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" %>
+        <%= link_to 'Delete', @product, method: :delete, class: "py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ",data: { confirm: 'Are you sure?' } %>
+    <% end %>
+</div>

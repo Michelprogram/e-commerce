@@ -1,0 +1,21 @@
+<h2 class="text-4xl font-bold tracking-tight text-center sm:text-6xl">List of our products</h2>
+
+<div class="grid grid-cols-4 w-full gap-6">
+<% @products.each do |product| %>
+        <div class="max-w-xs bg-white shadow-lg rounded-lg overflow-hidden my-10">
+        <div class="px-4 py-2">
+            <h1 class="text-gray-900 font-bold text-3xl uppercase underline"><%= link_to product.name, product %></h1>
+            <p class="text-gray-600 text-sm mt-1"><%= product.description %></p>
+        </div>
+        <img class="h-56 w-full object-contain mt-2" src="https://static.wikia.nocookie.net/mtgsalvation_gamepedia/images/f/f8/Magic_card_back.jpg" alt="NIKE AIR">
+        <div class="flex items-center justify-between px-4 py-2 bg-gray-900">
+            <h1 class="text-gray-200 font-bold text-xl"><%= number_to_currency(product.price) %></h1>
+            <h1 class="text-gray-200 font-bold text-xl">stock <%= product.stock %></h1>
+            <% if current_user.buyer? %>
+                <%= link_to 'Add Product', new_product_path, class: "px-3 py-1 bg-gray-200 text-sm text-gray-900 font-semibold rounded" %>
+            <% end %>
+        </div>
+    </div>
+
+<% end %>
+</div>
